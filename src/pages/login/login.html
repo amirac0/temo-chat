@@ -1,0 +1,71 @@
+<ion-content padding>
+
+    <div id="logo" padding text-center>
+        <img src="./assets/img/logo.png">
+    </div>
+
+    <div padding>
+        <ion-segment [(ngModel)]="opt" color="light">
+            <ion-segment-button value="signin">
+                {{'LOGIN' | translate}}
+            </ion-segment-button>
+            <ion-segment-button value="signup">
+                {{'SIGNUP' | translate}}
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+
+    <div [ngSwitch]="opt">
+        <form (submit)="doLogin()" *ngSwitchCase="'signin'">
+
+            <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+
+
+
+            <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+
+
+            <div padding text-center>
+                <button ion-button round color="light" icon-right>
+            {{ 'SIGNIN' | translate }} <ion-icon name="log-in"></ion-icon>
+          </button>
+                <p>{{loginErrorString}}</p>
+            </div>
+
+
+        </form>
+
+        <form (submit)="doRegister()" *ngSwitchCase="'signup'">
+            <ion-label>{{ 'Username' | translate }}</ion-label>
+            <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
+
+
+            <ion-label float>{{ 'Fullname' | translate }}</ion-label>
+            <ion-input type="text" [(ngModel)]="account.fullname" name="fullname"></ion-input>
+
+
+
+            <ion-label float>{{ 'Email' | translate }}</ion-label>
+            <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+
+
+            <ion-label float>{{ 'Password' | translate }}</ion-label>
+            <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+
+
+
+            <ion-label float>{{ 'Retry Password' | translate }}</ion-label>
+            <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+
+
+            <div padding text-center>
+                <button ion-button round color="light" icon-right>
+            {{ 'SIGNUP' | translate }} <ion-icon name="person-add"></ion-icon>
+          </button>
+            </div>
+
+
+        </form>
+
+    </div>
+</ion-content>

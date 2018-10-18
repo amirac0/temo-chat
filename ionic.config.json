@@ -1,0 +1,7 @@
+{
+  "name": "temoChat",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
