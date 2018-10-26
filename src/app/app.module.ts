@@ -16,6 +16,7 @@ import { HttpProvider } from '../providers/http/http';
 import { Util } from '../providers/util/util';
 import { UserProvider } from '../providers/user/user';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { UserApiProvider } from '../providers/user-api/user-api';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -56,7 +57,8 @@ export function createTranslateLoader(http: HttpClient) {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     HttpProvider,
     Util,
-    UserProvider
+    UserProvider,
+    UserApiProvider
   ]
 })
 export class AppModule { }
