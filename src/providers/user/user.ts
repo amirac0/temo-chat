@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {User} from "../../models/user";
 import { Storage } from '@ionic/storage';
-
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operator/map';
 
 /*
  Generated class for the UserProvider provider.
@@ -15,7 +16,7 @@ export class UserProvider {
   private _user:User = new User();
   private _status:Number = 0; // le but de cette variable c'est de savori si l'utilisateur existe ou pas
 
-  constructor(private nativeStorage: Storage) {
+  constructor(private nativeStorage: Storage, private http:HttpClient) {
     console.log('Hello UserProvider Provider');
     // quand le user n'existe pas 
     this.statusUsers().then(
@@ -126,6 +127,19 @@ export class UserProvider {
       }
     )
   }
+
+
+  loginUser2(email: string, password:string){
+    return new Promise(
+      result => {
+        this.http.post("http://localhost/php/", {
+          "email": email,
+          "password": password,
+        }).subscribe(data => result(data));
+      }
+    )
+  }
+
 
   updateUser(user:User, isEmail:any = {type: false}){
     return this.nativeStorage.get('users').then( // on récupère des utilisateurs 

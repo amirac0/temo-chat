@@ -60,13 +60,26 @@ export class LoginPage {
 
   }
 
-  doLogin(){
+  doLogin_v2(){
     this.userProvider.loginUser(this.account.email, this.account.password).then(
       isConnect => {
         if(isConnect){
           this.navCtrl.setRoot('ListFriendsPage'); // setRoot -> permet de supprimer toutes les vues de la stack et de navigateur vers la root page
         }else{
           this.loginErrorString = "Error connection"
+        }
+      }
+    )
+  }
+
+  doLogin(){
+    this.userProvider.loginUser2(this.account.email, this.account.password).then(
+      (data:any) => {
+        if(data.errot)
+        this.loginErrorString = "connection error";
+        else{
+          localStorage.setItem("user", data.user);
+          this.navCtrl.setRoot('ListFriendsPage');
         }
       }
     )
